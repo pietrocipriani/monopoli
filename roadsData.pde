@@ -1,4 +1,5 @@
 final static HashMap roadsData = new HashMap<String, HashMap>();
+final static HashMap groupsCount = new HashMap<Integer, Integer>();
 static {
   roadsData.put("VICOLO CORTO", new HashMap(){{
     put("group", FUCSIA_GROUP);
@@ -264,6 +265,14 @@ static {
     put("price_house", 20000);
     put("price_hotel", 20000);
   }});
+  groupsCount.put(FUCSIA_GROUP, 2);
+  groupsCount.put(CYAN_GROUP, 3);
+  groupsCount.put(ORANGE_GROUP, 3);
+  groupsCount.put(BROWN_GROUP, 3);
+  groupsCount.put(RED_GROUP, 3);
+  groupsCount.put(YELLOW_GROUP, 3);
+  groupsCount.put(GREEN_GROUP, 3);
+  groupsCount.put(PURPLE_GROUP, 2);
 }
 
 
@@ -286,7 +295,7 @@ final Box[][] boxes = new Box[][]{
   {
     new JailBox(),
     new RoadBox("VIA ACCADEMIA"),
-    new NullBox(),
+    new SocietyBox(Society.ELECTRICITY),
     new RoadBox("CORSO ATENEO"),
     new RoadBox("PIAZZA UNIVERSITA'"),
     new StationBox(Direction.OVEST),
@@ -296,7 +305,7 @@ final Box[][] boxes = new Box[][]{
     new RoadBox("PIAZZA DANTE"),
   },
   {
-    new NullBox(),
+    new ParkingBox(),
     new RoadBox("VIA MARCO POLO"),
     new ProbChanceBox(ProbChance.CHANCE),
     new RoadBox("CORSO MAGELLANO"),
@@ -304,7 +313,7 @@ final Box[][] boxes = new Box[][]{
     new StationBox(Direction.NORD),
     new RoadBox("VIALE COSTANTINO"),
     new RoadBox("VIALE TRAIANO"),
-    new NullBox(),
+    new SocietyBox(Society.WATER),
     new RoadBox("PIAZZA GIULIO CESARE"),
   },
   {

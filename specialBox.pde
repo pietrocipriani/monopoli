@@ -7,6 +7,24 @@ class NullBox extends SpecialBox {
   void drawOver(){}
   void over(Player p){}
 }
+class ParkingBox extends SpecialBox {
+  void drawBox (int l){
+    rect (0, 0, l/8f+l/200f, l/8f+l/200f);
+    textFont (fontMediumBold);
+    
+    pushMatrix();
+    translate (l/16f, l/16f);
+    rotate (-PI/4);
+    imageMode (CENTER);
+    image(parking, 0, 0, l/12f, l/12f);
+    
+    popMatrix();
+  }
+  void onClick (){}
+  void drawInfo(){}
+  void drawOver(){}
+  void over(Player p){}
+}
 
 class StartBox extends SpecialBox {
   void drawBox(int l){

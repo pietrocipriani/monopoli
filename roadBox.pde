@@ -18,12 +18,19 @@ class RoadBox extends BuyableBox {
     textFont(fontSmall);
     rect (0, 0, l/12f, l/8f+l/200);
     
-    fill (houses != 5 ? group : 0xFFFF0000);
+    fill (group);
     rect (0, 0, l/12f, l/32f);
     
-    if (houses < 5){
+    if (houses == 5){
+      fill (0xFFFF0000);
+      rect (0, 0, l/12f, l/64f);
+      fill (0xFF7F0000);
+      rect (0, l/64f, l/12f, l/64f);
+    } else {
       fill (0xFF00FF00);
-      rect(0, 0, l*houses/48f, l/32f);
+      rect (0, 0, l/48f*houses, l/64f);
+      fill (0xFF007F00);
+      rect (0, l/64f, l/48f*houses, l/64f);
     }
     
     
@@ -101,7 +108,7 @@ class RoadBox extends BuyableBox {
   }
   
   public int getRent (){
-    if (houses == 0) return (int) m.get("rent");
+    if (houses == 0) return (int) m.get("rent") * (owner.countGroup(group) == (int) groupsCount.get(group) ? 2 : 1);
     if (houses == 5) return (int) m.get("rent_hotel");
     return (int) m.get("rent_"+houses+"house");
   }

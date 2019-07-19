@@ -3,6 +3,9 @@ PImage probability;
 PImage chance;
 PImage jail;
 PImage toJail;
+PImage parking;
+PImage electricSociety;
+PImage waterSociety;
 
 int lastL = 0;
 PFont fontSmall;
@@ -27,6 +30,9 @@ void setup (){
   chance = loadImage("chance.png");
   jail = loadImage("jail.png");
   toJail = loadImage("toJail.png");
+  parking = loadImage("parking.png");
+  electricSociety = loadImage("electric_society.png");
+  waterSociety = loadImage("water_society.png");
   
   ((PGraphicsOpenGL)g).textureSampling(3);
   //smooth (4);

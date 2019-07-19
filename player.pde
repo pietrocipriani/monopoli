@@ -87,9 +87,20 @@ class Player {
     }
     return count;
   }
+  
   public int countStations(){
     int count = 0;
     for (BuyableBox prop : properties) if (prop instanceof StationBox) count++;
+    return count;
+  }
+  public int countSocieties(){
+    int count = 0;
+    for (BuyableBox prop : properties) if (prop instanceof SocietyBox) count++;
+    return count;
+  }
+  public int countGroup(color group){
+    int count = 0;
+    for (BuyableBox prop : properties) if (prop instanceof RoadBox && ((RoadBox) prop).group == group) count++;
     return count;
   }
 }

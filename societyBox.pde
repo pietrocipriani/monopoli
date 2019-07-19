@@ -1,27 +1,22 @@
-enum Direction {
-  NORD, EST, SUD, OVEST
+enum Society {
+  ELECTRICITY, WATER
 }
 
-class StationBox extends BuyableBox {
-  final Direction dir;
+class SocietyBox extends BuyableBox {
+  final Society type;
   
-  public StationBox (Direction dir){
-    this.dir = dir;
-    this.value = 20000;
+  public SocietyBox (Society type){
+    this.type = type;
+    this.value = 15000;
   }
   void drawBox(int l){
     rect (0, 0, l/12f, l/8f+l/200);
-    imageMode (CORNER);
-    image(train, 0, l/32f, l/12f, l/16f);
+    imageMode (CENTER);
+    image(type == Society.WATER ? waterSociety : electricSociety, l/24f, l/16f, l/14f, l/14f);
     
-    fill (0, 0, 0);
-    text ("STAZIONE "+dir+"\n£ 20.000", 0, 0, l/12f, l/32f);
-    
-    pushMatrix();
-    translate (l/12f, l/8f);
-    rotate(PI);
-    text ("STAZIONE "+dir+"\n£ 20.000", 0, 0, l/12f, l/32f);
-    popMatrix();
+    fill (0);
+    text ("SOCIETA' "+ (type == Society.WATER ? "ACQUA POTABILE" : "ELETTRICA"), 0, 0, l/12f, l/37f);
+    text ("£ 15.000", 0, l/10f, l/12f, l/37f);
   }
   
   void onClick(){
@@ -38,27 +33,27 @@ class StationBox extends BuyableBox {
     textFont (fontMediumBold);
     textAlign (RIGHT, TOP);
     
-    text ("20.000", lastL/4f, -lastL*3/10f);
+    text ("15.000", lastL/4f, -lastL*3/10f);
     textAlign (RIGHT, BOTTOM);
-    text ("2.500\n\n5.000\n\n10.000\n\n20.000\n10.000", lastL/4f, lastL*3/10f);
+    text ("2.000\n\n10.000\n7.500", lastL/4f, lastL*3/10f);
     
     textAlign (LEFT, BOTTOM);
-    text ("Rendita\n\n\n\n\n\n\nValore ipotecario", -lastL/4f, lastL*3/10f);
+    text ("Rendita\n\n\nValore ipotecario", -lastL/4f, lastL*3/10f);
     
     fill (0);
     textAlign (CENTER, CENTER);
     
-    text ("STAZIONE "+dir, 0, -lastL*9/40f, lastL/2f, -lastL/15f);
+    text ("SOCIETA' "+(type == Society.WATER ? "ACQUA POTABILE" : "ELETTRICA"), 0, -lastL*9/40f, lastL/2f, -lastL/15f);
     
-    imageMode (CORNER);
-    image(train, -lastL/12f, -lastL/7f, lastL/6f, lastL/8f);
+    imageMode (CENTER);
+    image(type == Society.WATER ? waterSociety : electricSociety, 0, -lastL/40f, lastL/4f, lastL/4f);
     
     fill (100);
     textFont (fontMedium);
     textAlign (LEFT, TOP);
     text ("Valore                 £ ", -lastL/4f, -lastL*3/10f);
     textAlign (LEFT, BOTTOM);
-    text ("                    £\nSe si possiedono 2\n  Stazioni . . . .  £\nSe si possiedono 3\n  Stazioni . . . .  £\nSe si possiedono 4\n  Stazioni . . . .  £\n                    £", -lastL/4f, lastL*3/10f);
+    text ("         . . . . . .  £\nSe si possiede anche\n"+(type == Society.WATER ? "la Società Elettrica" : "    l'Acqua Potabile")+"  £\n                      £", -lastL/4f, lastL*3/10f);
     
     
     fill(0xFFFF0000);
@@ -80,9 +75,7 @@ class StationBox extends BuyableBox {
   }
   
   public int getRent (){
-    int rent = 2500;
-    for (int i=1; i<owner.countStations(); i++) rent *= 2;
-    return rent;
+     return owner.countSocieties() == 2 ? 10000 : 2000;
   }
   
   void over(Player p){
@@ -109,5 +102,5 @@ class StationBox extends BuyableBox {
       owner.buyProperty(this);
       setShow(Show.NO);
     }
-  }
+  } 
 }
